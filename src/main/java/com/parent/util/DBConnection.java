@@ -30,7 +30,7 @@ public class DBConnection {
 
     private static final String URL = System.getenv("DB_URL") != null ?
             System.getenv("DB_URL") :
-            "jdbc:mysql://localhost:3306/job_portal";
+            "jdbc:mysql://localhost:3306/railway";
 
     private static final String USER = System.getenv("DB_USER") != null ?
             System.getenv("DB_USER") :
