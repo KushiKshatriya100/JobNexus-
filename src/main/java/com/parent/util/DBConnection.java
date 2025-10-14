@@ -60,24 +60,17 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    // ✅ First preference: environment variables (for Render)
-    // ✅ Second preference: local fallback (for your laptop)
+    // ✅ Single combined DB_URL (username/password included)
+    // ✅ Fallback for local development
     private static final String URL = System.getenv("DB_URL") != null ?
             System.getenv("DB_URL") :
-            "jdbc:mysql://localhost:3306/job_portal";
-
-    private static final String USER = System.getenv("DB_USER") != null ?
-            System.getenv("DB_USER") :
-            "root";
-
-    private static final String PASSWORD = System.getenv("DB_PASS") != null ?
-            System.getenv("DB_PASS") :
-            "root";
+            "jdbc:mysql://root:root@localhost:3306/job_portal";
 
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(URL, USER, PASSWORD);
+            // ✅ Use only URL, username/password embedded in JDBC URL
+            return DriverManager.getConnection(URL);
         } catch (ClassNotFoundException e) {
             throw new SQLException("MySQL Driver not found", e);
         }
