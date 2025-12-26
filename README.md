@@ -1,75 +1,184 @@
-# 💼 JobPortal
 
-A full-stack **Job Portal Web Application** built using **Java, JSP, Servlets, JDBC, and MySQL**, designed to connect **job seekers** and **recruiters** in a simple and efficient way.
+# 💼 JobPortal (JobNexus)
 
----
-
-## 🚀 Project Overview
-
-The **JobPortal** web application allows:
-- Job seekers to **register, log in, view, and apply** for jobs.
-- Recruiters to **post, edit, and manage** job listings.
-- Admins to oversee the platform activities.
-
-Built with **Java EE (JSP + Servlet)** architecture and deployed on **Render**, with a **MySQL** database hosted on **Railway**.
+A **Java Web Application** built using **JSP, Servlets, JDBC, and MySQL**, following a clean **MVC-style Maven project structure**.  
+This project is ideal for **MCA final-year submission, placements, and Java backend interviews**.
 
 ---
 
-## 🧰 Tech Stack
+## 🎯 Project Goal (Structure First)
 
-| Layer | Technology Used |
-|-------|------------------|
-| **Frontend** | HTML, CSS, Bootstrap, JSP |
-| **Backend** | Java, Servlets, JDBC |
-| **Database** | MySQL (Hosted on Railway) |
-| **Build Tool** | Maven |
-| **Server** | Apache Tomcat |
-| **Hosting** | Ngrok Platform |
+This project demonstrates:
+- Standard **Maven directory layout**
+- Clear separation of **Controller, DAO, Model, Utility, and View layers**
+- Real-world **Servlet → DAO → DB → JSP** request flow
+- Generation of a deployable **WAR file** for Apache Tomcat
 
----
-
-## ✨ Features
-
-### 👨‍💼 For Job Seekers:
-- Register and create profile  
-- View available jobs  
-- Apply for desired jobs  
-- Upload resume  
-
-### 🧑‍💻 For Recruiters:
-- Post new job listings  
-- Manage (update/delete) job posts  
-- View applicants for each job  
-
-### 🧭 Admin Panel:
-- Manage users and jobs  
-- Monitor overall platform activity  
+> 📌 Focus of this README: **Project Structure & Architecture**
 
 ---
 
-## 🗂️ Project Structure
-JobPortal/
+## 🧱 Technology Stack
+
+| Layer | Technology |
+|-----|-----------|
+| Frontend | JSP, HTML, CSS |
+| Backend | Java, Servlets |
+| Database | MySQL |
+| Persistence | JDBC |
+| Build Tool | Maven |
+| Server | Apache Tomcat |
+
+---
+
+## 📁 Project Structure (Maven Standard)
+
+```
+JobNexus-
+│── pom.xml                     # Maven dependencies & build config
+│── .gitignore                  # Git ignore rules
+│
 ├── src/
-│ ├── main/java/com/parent/
-│ │ ├── dao/ # Data Access Layer
-│ │ ├── model/ # JavaBeans (Entities)
-│ │ ├── servlet/ # Controllers
-│ │ └── util/ # DBConnection utility
-│ └── main/webapp/
-│ ├── jsp/ # JSP Pages
-│ ├── css/, js/, images/
-│ └── WEB-INF/ # web.xml
-├── pom.xml # Maven dependencies
-└── README.md # Project documentation
-
+│   └── main/
+│       ├── java/
+│       │   └── com/
+│       │       └── parent/
+│       │           ├── controller/        # Servlet Controllers
+│       │           │   ├── LoginServlet.java
+│       │           │   ├── RegisterServlet.java
+│       │           │   ├── JobsServlet.java
+│       │           │   ├── ApplyServlet.java
+│       │           │   ├── PostJobServlet.java
+│       │           │   ├── ManageJobsServlet.java
+│       │           │   ├── ProfileServlet.java
+│       │           │   └── LogoutServlet.java
+│       │           │
+│       │           ├── dao/               # JDBC Database Layer
+│       │           │   ├── UserDAO.java
+│       │           │   ├── JobDAO.java
+│       │           │   ├── ApplicationDAO.java
+│       │           │   └── CandidateProfileDAO.java
+│       │           │
+│       │           ├── model/             # POJO / Entity Classes
+│       │           │   ├── User.java
+│       │           │   ├── Job.java
+│       │           │   ├── Application.java
+│       │           │   └── CandidateProfile.java
+│       │           │
+│       │           └── util/              # Utility Classes
+│       │               └── DBConnection.java
+│       │
+│       └── webapp/
+│           ├── jsp/                       # JSP View Pages
+│           │   ├── index.jsp
+│           │   ├── login.jsp
+│           │   ├── register.jsp
+│           │   ├── jobs.jsp
+│           │   ├── apply.jsp
+│           │   ├── profile.jsp
+│           │   └── recruiter_dashboard.jsp
+│           │
+│           └── WEB-INF/
+│               └── web.xml               # Servlet mappings
+│
+└── target/
+    ├── JobPortal.war                     # Deployable WAR file
+    └── classes/                          # Compiled .class files
+```
 
 ---
 
-## ⚙️ Installation & Setup
+## 🏛️ Architecture Explanation
 
-Follow these steps to run the project locally 👇
+### 🔹 Controller Layer (`controller`)
+- Contains **Servlet classes**
+- Handles HTTP requests (`doGet`, `doPost`)
+- Controls navigation between JSP pages
+- Communicates with DAO layer
 
-### 1️⃣ Clone the repository
+**Example:** `LoginServlet`, `PostJobServlet`
+
+---
+
+### 🔹 DAO Layer (`dao`)
+- Handles **all database operations**
+- Uses JDBC with PreparedStatements
+- Keeps SQL logic separate from Servlets
+
+**Example:** `UserDAO`, `JobDAO`
+
+---
+
+### 🔹 Model Layer (`model`)
+- POJO classes representing database tables
+- Contains fields, constructors, getters, and setters
+
+**Example:** `User`, `Job`, `Application`
+
+---
+
+### 🔹 Utility Layer (`util`)
+- Common reusable logic
+- Manages database connection handling
+
+**Example:** `DBConnection.java`
+
+---
+
+### 🔹 View Layer (`jsp`)
+- JSP pages for UI rendering
+- Receives data via request/session attributes
+
+---
+
+## 🔄 Request Flow (Interview Explanation)
+
+```
+Browser
+   ↓
+JSP Form
+   ↓
+Servlet (Controller)
+   ↓
+DAO (JDBC)
+   ↓
+MySQL Database
+   ↑
+Servlet
+   ↑
+JSP Response
+```
+
+---
+
+## 📦 Build & Deployment
+
 ```bash
-git clone https://github.com/<your-username>/JobPortal.git
-cd JobPortal
+mvn clean package
+```
+
+- Generates `JobPortal.war`
+- Deploy WAR on **Apache Tomcat**
+- Access via `http://localhost:8080/JobPortal`
+
+---
+
+## ✅ Why This Structure is Interview-Ready
+
+✔ Follows industry-standard Maven layout  
+✔ Clean MVC separation  
+✔ Easy migration to Spring MVC / Spring Boot  
+✔ Perfect for explaining backend flow  
+
+---
+
+## 🚀 Future Enhancements
+
+- Add Service Layer
+- Migrate to Spring MVC / Spring Boot
+- Integrate Spring Security
+- Replace JSP with Thymeleaf
+
+---
+
+📌 *Designed for MCA students, Java backend roles, and servlet-based system design interviews.*
