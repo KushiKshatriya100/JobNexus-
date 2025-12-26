@@ -24,7 +24,7 @@ Built with **Java EE (JSP + Servlet)** architecture and deployed on **Render**, 
 | **Database** | MySQL (Hosted on Railway) |
 | **Build Tool** | Maven |
 | **Server** | Apache Tomcat |
-| **Hosting** | Render |
+| **Hosting** | Ngrok Platform |
 
 ---
 
