@@ -163,15 +163,6 @@ mvn clean package
 
 ---
 
-## ✅ Why This Structure is Interview-Ready
-
-✔ Follows industry-standard Maven layout  
-✔ Clean MVC separation  
-✔ Easy migration to Spring MVC / Spring Boot  
-✔ Perfect for explaining backend flow  
-
----
-
 ## 🚀 Future Enhancements
 
 - Add Service Layer
@@ -181,4 +172,4 @@ mvn clean package
 
 ---
 
-📌 *Designed for MCA students, Java backend roles, and servlet-based system design interviews.*
+📌 *Servlet-based system design.*
